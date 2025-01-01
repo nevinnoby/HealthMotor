@@ -1,0 +1,77 @@
+const handleClearEvent = (id: string) => {
+  setEvents((prevEvents) =>
+    prevEvents.map((event) =>
+      event.id === id
+        ? { ...event, title: '', organizer: '', status: 'pending', date: '' } // Reset details
+        : event
+    )
+  );
+};
+
+const EventItem = ({ item }: { item: Event }) => (
+  <View style={styles.eventItem}>
+    <View style={styles.eventContent}>
+      <View style={styles.eventHeader}>
+        <Text style={styles.eventTitle} numberOfLines={1}>
+          {item.title || 'No Title'}
+        </Text>
+        <View style={[styles.statusBadge, { backgroundColor: getStatusColor(item.status) }]}>
+          <Text style={styles.statusText}>{item.status}</Text>
+        </View>
+      </View>
+      <Text style={styles.eventSubtitle} numberOfLines={1}>
+        {item.organizer || 'No Organizer'} | {item.date || 'No Date'}
+      </Text>
+    </View>
+    <View style={styles.eventActions}>
+      {item.status === 'pending' && (
+        <>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => handleUpdateStatus(item.id, 'approved')}
+          >
+            <Check size={20} color="#4CAF50" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.actionButton}
+            onPress={() => handleUpdateStatus(item.id, 'rejected')}
+          >
+            <X size={20} color="#F44336" />
+          </TouchableOpacity>
+        </>
+      )}
+      <TouchableOpacity
+        style={styles.moreButton}
+        onPress={() => handleClearEvent(item.id)}
+      >
+        <Brush size={20} color="#666" />
+      </TouchableOpacity>
+    </View>
+  </View>
+);
+
+
+
+
+
+
+
+
+
+
+const filteredEvents = events
+  .filter((event) => {
+    // Filter by status
+    const statusMatch =
+      (filters.pending && event.status === 'pending') ||
+      (filters.approved && event.status === 'approved') ||
+      (filters.rejected && event.status === 'rejected');
+
+    // Filter by search query (safely check for title and organizer)
+    const searchMatch =
+      (event.title && event.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (event.organizer && event.organizer.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    return statusMatch && searchMatch;
+  })
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date
