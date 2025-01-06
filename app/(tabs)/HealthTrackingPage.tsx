@@ -9,7 +9,7 @@ const ActivityData = [
   { id: '2', activity: 'Yoga', time: '45 min', calories: 150, date: '2024-12-29' },
   { id: '3', activity: 'Cycling', time: '60 min', calories: 500, date: '2024-12-28' },
   { id: '4', activity: 'Swimming', time: '40 min', calories: 400, date: '2024-12-27' },
-  // Add more activity data here
+
 ];
 
 const TrackingPage = () => {
