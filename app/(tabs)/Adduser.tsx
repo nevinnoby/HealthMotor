@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet,ScrollView, ActivityIndicator } from 'react-native';
+
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet,ScrollView, ActivityIndicator,Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { firestore } from '../../firebase/firebase'; // Ensure the correct path
 import { collection, addDoc } from 'firebase/firestore';
 
+
 const AdminAddUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
+
   // const [muscleGroup, setMuscleGroup] = useState('user1-reading');
+
   const [loading, setLoading] = useState(false);
 
   const handleAddUser = async () => {
     setLoading(true);
     try {
+
       await addDoc(collection(firestore, 'Users'), {
         name: name,
         email: email,
@@ -26,6 +31,7 @@ const AdminAddUser = () => {
       setEmail('');
       setAge('');
       // setMuscleGroup('user1-reading');
+
     } catch (error) {
       Alert.alert('Error', 'Failed to add user. Please try again.');
     } finally {
@@ -77,7 +83,9 @@ const AdminAddUser = () => {
             />
           </View>
 
+
           {/* <View style={styles.inputContainer}>
+
             <Text style={styles.label}>Hardware reading</Text>
             <View style={styles.pickerContainer}>
               <Picker
@@ -95,7 +103,9 @@ const AdminAddUser = () => {
                 <Picker.Item label="user8-reading" value="user8-reading" />
               </Picker>
             </View>
+
           </View> */}
+
 
           <TouchableOpacity
             style={styles.button}
