@@ -6,15 +6,14 @@ import { getStorage } from 'firebase/storage';
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBF4XFvImO9-MG2veM1C5Wmu6mefambgoY",
-  authDomain: "perimeter-ffe11.firebaseapp.com",
-  projectId: "perimeter-ffe11",
-  storageBucket: "perimeter-ffe11.appspot.com", 
-  messagingSenderId: "314951159234",
-  appId: "1:314951159234:web:1a6b85a120c4d1a57c1a5b",
-  measurementId: "G-PB8DMXFH73",
+  apiKey: "AIzaSyBhHIy7ypGUUuAM6tExLWwNJ93wPBtEWT8",
+  authDomain: "health-f41fb.firebaseapp.com",
+  projectId: "health-f41fb",
+  storageBucket: "health-f41fb.firebasestorage.app",
+  messagingSenderId: "329988767376",
+  appId: "1:329988767376:web:d93b467f4e21ba21422215",
+  measurementId: "G-VJ5X67RQTH"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
