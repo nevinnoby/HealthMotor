@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native';
 import { Avatar, Card, Button, Searchbar } from 'react-native-paper';
+import { firestore } from '../../firebase/firebase'; // Adjust the import path as needed
+import { collection, getDocs } from 'firebase/firestore';
 
 const { width } = Dimensions.get('window');
 
 const UsersListPage = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [users, setUsers] = useState([]);
 
-  const users = [
-    { id: '1', name: 'John Doe', age: 29, profilePic: 'https://via.placeholder.com/150' },
-    { id: '2', name: 'Jane Smith', age: 34, profilePic: 'https://via.placeholder.com/150' },
-    { id: '3', name: 'Alice Johnson', age: 22, profilePic: 'https://via.placeholder.com/150' },
-    { id: '4', name: 'Bob Lee', age: 41, profilePic: 'https://via.placeholder.com/150' },
-    // Add more users here...
-  ];
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const usersCollection = collection(firestore, 'Users');
+        const usersSnapshot = await getDocs(usersCollection);
+        const usersList = usersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUsers(usersList);
+      } catch (error) {
+        console.error("Error fetching users: ", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -30,7 +43,7 @@ const UsersListPage = ({ navigation }) => {
   const renderUserItem = ({ item }) => (
     <Card style={styles.card}>
       <Card.Content style={styles.cardContent}>
-        <Avatar.Image size={50} source={{ uri: item.profilePic }} />
+        <Avatar.Image size={50} source={{ uri: item.profilePic || 'https://via.placeholder.com/150' }} />
         <View style={styles.userInfo}>
           <Text style={styles.userName}>{item.name}</Text>
           <Text style={styles.userAge}>{item.age} years old</Text>
