@@ -6,13 +6,13 @@ import { getStorage } from 'firebase/storage';
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBhHIy7ypGUUuAM6tExLWwNJ93wPBtEWT8",
-  authDomain: "health-f41fb.firebaseapp.com",
-  projectId: "health-f41fb",
-  storageBucket: "health-f41fb.firebasestorage.app",
-  messagingSenderId: "329988767376",
-  appId: "1:329988767376:web:d93b467f4e21ba21422215",
-  measurementId: "G-VJ5X67RQTH"
+  apiKey: "AIzaSyA3zJcCEWFDislEia0_nxRHT848v6Luo1I",
+  authDomain: "hearth-29dac.firebaseapp.com",
+  projectId: "hearth-29dac",
+  storageBucket: "hearth-29dac.firebasestorage.app",
+  messagingSenderId: "683826532095",
+  appId: "1:683826532095:web:234dde145308126ab986ca",
+  measurementId: "G-SB33Q0P89Y"
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
